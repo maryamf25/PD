@@ -2,8 +2,7 @@
 using namespace std;
 main() {
 	string name;
-	int target;
-	int days;
+	int target,days;
 	cout<< "Enter the Name of the Person: ";
 	cin>> name;
 	cout<< "Enter the target weight loss in kilograms: ";
