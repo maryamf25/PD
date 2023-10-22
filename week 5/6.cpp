@@ -6,11 +6,19 @@ using namespace std;
 void gotoxy(int x, int y);
 
 void header();
+
+char askIdentity();
+char identity = 0;
+string admin();
+void adminMainMenu();
+
+void vet_profile();
 int h1 = 15, h2 = 2;
-void tagline();
 
 int p = 30, q = 35;
 void printpet();
+void erasepet();
+void movepet();
 void printMenu();
 void menubar();
 void options(char option);
@@ -35,9 +43,35 @@ main()
 
   system("cls");
   printpet();
+
   header();
-  tagline();
-  printMenu();
+  char check_identity = askIdentity();
+   if (check_identity == '2')
+  {
+    system("cls");
+
+    header();
+    printMenu();
+  }
+  // string getAdminPassword = admin();
+  // if (check_identity == '1')
+  // {
+
+  //   system("cls");
+  //   printpet();
+
+  //   header();
+  //   admin();
+
+  //   if (getAdminPassword == "Maryam")
+  //   {
+
+  //     adminMainMenu();
+  //   }
+  // }
+
+  // else 
+ 
 }
 void header()
 {
@@ -63,11 +97,77 @@ void header()
   gotoxy(1, 12);
   cout << "  *****************************************************************************************************************************************************************  " << endl
        << endl;
-}
-void tagline()
-{
-  gotoxy(1, 16);
+
+  gotoxy(1, 14);
   cout << "                                                          \"BECAUSE THE PETS DESERVE THE BEST!\"                                                                   " << endl;
+}
+char askIdentity()
+{
+  gotoxy(60, 15);
+  cout << "_________________________________" << endl
+       << endl;
+  gotoxy(63, 17);
+  cout << "1. ADMIN";
+  gotoxy(63, 19);
+  cout << "2. PET OWNER / CUSTOMER";
+  gotoxy(60, 21);
+  cout << "_________________________________" << endl
+       << endl;
+  gotoxy(63, 23);
+ cout << "Enter Your Identity: ";
+  cin >> identity;
+  return identity;
+  // gotoxy(63, 25);
+  
+}
+string admin()
+{
+  system("cls");
+  printpet();
+
+  header();
+  gotoxy(60, 15);
+  cout << "_________________________________" << endl
+       << endl;
+  gotoxy(60, 21);
+  cout << "_________________________________" << endl;
+  gotoxy(63, 17);
+  cout << "Enter Your Email...";
+  string adminEmail;
+  cin >> adminEmail;
+  gotoxy(63, 19);
+  cout << "Enter Your Password...";
+  string adminPassword;
+  cin >> adminPassword;
+
+  return adminPassword;
+}
+void adminMainMenu()
+{
+  system("cls");
+  printpet();
+
+  header();
+  gotoxy(60, 15);
+  cout << "_________________________________" << endl
+       << endl;
+  gotoxy(63, 17);
+  cout << "1. View list of Veterinarians";
+  gotoxy(63, 19);
+  cout << "2. Add a new Veterinarian";
+  gotoxy(63, 21);
+  cout << "3. View Pet Owners"
+       << endl;
+  gotoxy(63, 23);
+  cout << "4. Appointments"
+       << endl;
+  gotoxy(60, 25);
+  cout << "_________________________________" << endl
+       << endl;
+  // gotoxy(63, 27);
+  // cout << "Enter Your Requirement: ";
+  // int req;
+  // cin >> req;
 }
 void printpet()
 {
@@ -89,29 +189,20 @@ void printpet()
 void printMenu()
 {
 
-  gotoxy(60, 18);
-  cout << "|!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!|" << endl
+  gotoxy(60, 15);
+  cout << "_________________________________" << endl
        << endl;
-  gotoxy(60, 19);
-  cout << "|                               |";
-  gotoxy(60, 20);
-  cout << "| 1. About Us                   |";
-  gotoxy(60, 21);
-  cout << "|                               |";
-  gotoxy(60, 22);
-  cout << "| 2. Services                   |";
+  gotoxy(63, 17);
+  cout << "1. About Us";
+  gotoxy(63, 19);
+  cout << "2. Services";
+  gotoxy(63, 21);
+  cout << "3. Find a Veterinarian";
   gotoxy(60, 23);
-  cout << "|                               |";
-  gotoxy(60, 24);
-  cout << "| 3. Find a Veterinarian        |";
-  gotoxy(60, 25);
-  cout << "|                               |";
-  gotoxy(60, 26);
-  cout << "|!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!|" << endl
+  cout << "_________________________________" << endl
        << endl;
-  gotoxy(63, 35);
+  gotoxy(63, 25);
   cout << "Enter Your Requirement: ";
-  ;
 
   cin >> requirement;
   if (requirement == '1')
@@ -151,7 +242,6 @@ void options(char option)
     system("cls");
     printpet();
     header();
-    tagline();
     printMenu();
   }
   if (option == '1')
@@ -267,11 +357,7 @@ void overnightCare()
     cout << "4. Puppies are not able to regulate their body temperature well. Keep the environment warm  ";
     gotoxy(30, 30);
     cout << "(around 85-90 F or 29-32 C) using heating pads or a heat lamp. ";
-
     gotoxy(63, 40);
-    cout << "Press 0 for home or any option to continue.....";
-    cin >> option;
-    options(option);
   }
   if (type == "rabbit")
   {
@@ -294,10 +380,6 @@ void overnightCare()
     cout << "4. Leave a few safe and engaging toys or chewing items in your rabbit's enclosure to keep ";
     gotoxy(30, 31);
     cout << "them entertained during their active hours. ";
-    gotoxy(63, 40);
-    cout << "Press 0 for home or any option to continue.....";
-    cin >> option;
-    options(option);
   }
 
   if (type == "cat")
@@ -322,10 +404,6 @@ void overnightCare()
     gotoxy(30, 31);
     cout << " them from nighttime dangers and predators. ";
     gotoxy(63, 40);
-
-    cout << "Press 0 for home or any option to continue.....";
-    cin >> option;
-    options(option);
   }
   gotoxy(63, 40);
   cout << "Press 0 for home or any option to continue.....";
