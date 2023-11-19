@@ -1,88 +1,35 @@
 #include <iostream>
 using namespace std;
-string findBrokenKeys(string correctPhrase, string actualTyped);
-string UniqueKeys(string s);
-bool isAlreadyEntered(string arr, int size, char ch);
+int spin(string arr[], int size);
 
 main()
 {
-    string s1, s2;
-    cout << "Enter the correct phrase: ";
-    getline(cin, s1);
-    cout << "Enter what you actually typed: ";
-    getline(cin, s2);
-    string result = findBrokenKeys(s1, s2);
-    cout << "Broken keys: " << result;
+    int arrLength;
+    cout << "Enter the length of the array: ";
+    cin >> arrLength;
+    string rotations[arrLength];
+    cout << "Enter the elements of the array (\"left\" or \"right\"): " << endl;
+    for (int i = 0; i < arrLength; i++)
+    {
+        cin >> rotations[i];
+    }
+    int result = spin(rotations, arrLength);
+    cout << "Number of full rotations: " << result;
 }
-string findBrokenKeys(string correctPhrase, string actualTyped)
+int spin(string arr[], int size)
 {
-
-    string newPhrase= "";
-   
-    string finalPhrase = "";
-    int m = 0;
-    bool check;
-    int j =0;
-    int length = correctPhrase.length();
-    for (j = 0; j < correctPhrase.length(); j++)
-    {
-         if (correctPhrase[j] != actualTyped[j])
-        {
-            newPhrase+= correctPhrase[j];
-            m++;
-           }
-    }
-
-    string unique = UniqueKeys(newPhrase);
-    return unique;
-        
-    }
-
-string UniqueKeys(string s)
-{
-   
-    int  i = 0,x=0;
-    string makeArray="";
-    bool check;
-    while (i < s.length())
-    {
-
-      
-        
-        check = isAlreadyEntered(s, i, s[i]);
-
-        if (check==0)
-        {
-            makeArray = makeArray + s[i];
-            
+    int rotation = 0;
+    for(int i=0; i<size; i++){
+        if(arr[i]=="right"){
+            rotation+=90;
         }
-
-         if (check==1)
-        {
-           x++;
-        }
-
-        i++;
-    }
-
-    return makeArray;
-}
-bool isAlreadyEntered(string arr, int size, char ch)
-{
-
-    int i = 0 ;
-    for (int j = 0; j < size; j++)
-    {
-
-        if (ch == arr[j])
-        {
-            i++;
+        else if(arr[i]=="left"){
+            rotation-=90;
         }
     }
-    if(i>0){
-        return true;
+    rotation/=360;
+    if(rotation<0){
+        rotation*= -1;
     }
-    else { 
-        return false;
-    }
+    return rotation;
 }

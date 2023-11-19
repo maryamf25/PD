@@ -1,40 +1,61 @@
+
 #include <iostream>
 using namespace std;
-int coloringTime(string cols[], int size);
+string order(string words);
+int countWords(string arr);
 
 main()
 {
-
-    int size, j = 1, n;
-    string input;
-    cout << "Enter the size of Array: ";
-    cin >> size;
-    string numbers[size];
-    for (int i = 0; i < size; i++)
-    {
-        cout << "Enter Element " << j << ": ";
-        cin >> input;
-        numbers[i] = input;
-        j++;
-    }
-     int result = coloringTime(numbers, size);
-     cout << "Time to color: "<<result << " seconds";
-   
+    string words;
+    cout << "Enter a string: ";
+    getline(cin, words);
+    string result = order(words);
+    cout << "Reversed string: " << result;
 }
-int coloringTime(string cols[], int size)
+string order(string words)
 {
-    int time=0;
-    
-    int timeForColor = 2*size;
-    
-    for ( int i=0; i<size-1; i++){
-        if(cols[i]!=cols[i+1]){
-                 time+=1;
+    int number = countWords(words);
+    string reverse[number + 1];
+    string word = "";
+    int idx = 0;
+    int count = 0;
+    for (int x = 0; x < words.length(); x++)
+    {
+        if (words[x] != ' ')
+        {
+            word += words[x];
         }
-       
-
+        else
+        {
+            reverse[count] = word;
+            word = "";
+            count++;
+        }
     }
-    int total = time+ timeForColor;
-    return total;
-  
+    if (count == number)
+    {
+        reverse[count] = word;
+    }
+    string result = "";
+    for (int i = number; i >= 0; i--)
+    {
+        result += reverse[i];
+        if (i != 0)
+        {
+            result += " ";
+        }
+    }
+    return result;
+}
+int countWords(string arr)
+{
+    int count = 0;
+    for (int x = 0; x < arr.length(); x++)
+    {
+        if (arr[x] == ' ')
+        {
+            count++;
+        }
+    }
+    return count;
 }

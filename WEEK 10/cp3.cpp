@@ -1,53 +1,56 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
-bool isIdentical(string numbers[], int size);
-
+bool isRepeatingCycle(int arr[], int length, int cycle);
 
 main()
 {
-
-    int size, j = 1;
-    string input;
-    cout << "Enter the size of Array: ";
-    cin >> size;
-    string numbers[size];
-    for (int i = 0; i < size; i++)
+    int arrLength, cycleLength;
+    int digits[100];
+    cout << "Enter the length of the array: ";
+    cin >> arrLength;
+    digits[arrLength];
+    cout << "Enter the elements of the array: " << endl;
+    for (int i = 0; i < arrLength; i++)
     {
-        cout << "Enter Element " << j << ": ";
-        cin >> input;
-        numbers[i] = input;
-        j++;
+        cin >> digits[i];
     }
-    bool result = isIdentical(numbers, size);
-    cout << result;
+    cout << "Enter the length of the cycle: ";
+    cin >> cycleLength;
+    bool result = isRepeatingCycle(digits, arrLength, cycleLength);
+    cout << "Output: " << result;
 }
-bool isIdentical(string numbers[], int size)
+bool isRepeatingCycle(int arr[], int length, int cycle)
 {
-    int y = 0;
-
-    int f = 0;
-
-    while (y < size)
+    string result = "false";
+    if (cycle > length)
     {
-        int m = 0;
-        for (f = 0; f < size; f++)
+        result = "true";
+    }
+    else
+    {
+        for (int x = 0; x < length; x++)
         {
-            if (numbers[y] == numbers[f])
+
+            if (x + cycle < length)
             {
-                m++;
+                if (arr[x] == arr[x + cycle])
+                {
+                    result = "true";
+                }
+                else
+                {
+                    result = "false";
+                }
             }
         }
-        if (m == size)
-        {
+    }
 
-           
-            return true;
-        }
-        else
-        {
-
-            return false;
-        }
+    if (result == "true")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }

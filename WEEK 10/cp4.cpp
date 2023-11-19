@@ -1,56 +1,35 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
-void evenOddTransform(int arr[], int size, int n);
-
+int boxes(int arr[], int size, int box);
 
 main()
 {
-
-    int size, j = 1, n;
-    int input;
-    cout << "Enter the size of Array: ";
-    cin >> size;
-    int numbers[size];
-    for (int i = 0; i < size; i++)
+    int num;
+    int digits[100];
+    int size = 0;
+    cout << "Enter the number of boxes: ";
+    cin >> num;
+    digits[num];
+    cout << "Enter the dimensions of the boxes (length, width, height): "<< endl;
+    for (int i = 0; i < num * 3; i++)
     {
-        cout << "Enter Element " << j << ": ";
-        cin >> input;
-        numbers[i] = input;
-        j++;
+        cin >> digits[i];
+        size++;
     }
-    cout << "Enter number of times even-odd transformation need to be done: ";
-    cin >> n;
-     evenOddTransform(numbers, size,n);
-   
+    int result = boxes(digits, size, num);
+    cout << "Total volume of all boxes: " << result;
 }
-void evenOddTransform(int arr[], int size, int n){
-    int newArray[size];
-    cout << "[";
-    for (int i = 0; i<n ;i++){
-          for (int f = 0; f < size; f++)
-        {
-            if (arr[f]%2==0){
-             
-                arr[f]=  arr[f]-2;
-                 newArray[f] = arr[f];
-            }
-            else {
-                 arr[f] = arr[f]+2;
-                 newArray[f] = arr[f];
-            }
-            // cout << newArray[f] << endl;
-           if(i==n-1 && f==size-1){
-            cout << newArray[f] ;
-           }
-           else if (i==n-1){
-            cout << newArray[f] << ", ";
-           }
-        
-        }
-         
-        }
-        cout << "]";
-       
-   
+int boxes(int arr[], int size, int box)
+{
+    int sum = 0;
+    int product = 0;
+
+    for (int x = 0; x <size; x+=3)
+    {
+        product = arr[x]*arr[x+1]*arr[x+2];
+        sum += product;
+    }
+    return sum;
 }
+
+

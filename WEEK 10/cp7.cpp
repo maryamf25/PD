@@ -1,58 +1,88 @@
 #include <iostream>
-#include <string>
 using namespace std;
-void convertPINToDance(string pin);
-
+bool canBeArranged(int arr[], int size);
+bool isAlreadyEntered(int arr[], int size, int num);
 main()
 {
-    string input;
-    int count = 0;
-    cout << "Enter your PIN (4 digits): ";
-    cin >> input;
-    int length = input.length();
-    if (length == 4)
+    int arrLength, x = 0;
+    bool result, output;
+    cout << "Enter the length of the array: ";
+    cin >> arrLength;
+    int digits[arrLength];
+    cout << "Enter the elements of the array: " << endl;
+    for (int i = 0; i < arrLength; i++)
     {
-        if (isdigit(input[0]) && isdigit(input[1]) && isdigit(input[2]) && isdigit(input[3]))
+        cin >> digits[i];
+    }
+    for (int i = 0; i < arrLength; i++)
+    {
+        result = isAlreadyEntered(digits, arrLength, digits[i]);
+        if (result==1)
         {
-            convertPINToDance(input);
+            x++;
         }
-        else
+        else if(result==0)
         {
-            cout << "Invalid input.";
+            x=0;
         }
+    }
+    if (x > 0)
+    {
+        output = false;
+        cout << "if: " << output;
     }
     else
     {
-        cout << "Invalid input.";
+        output = canBeArranged(digits, arrLength);
+        cout << "Can be arranged: " << output;
     }
 }
-void convertPINToDance(string pin)
+bool isAlreadyEntered(int arr[], int size, int num)
 {
-    string MOVES[10] = {"Shimmy", "Shake", "Pirouette",
-                        "Slide", "Box Step", "Headspin", "Dosado",
-                        "Pop", "Lock", "Arabesque"};
-    int move,m=0;
-    string selectedMoves[4];
-    int pinlength = pin.length();
-    for (int i = 0; i < pinlength; i++)
+    int i = 0;
+    for (int x = 0; x < size; x++)
     {
-        int asciiCode = pin[i];
-        int digit = asciiCode - '0';
-        move = i + digit;
-
-        if (move > 9)
+        if (num == arr[x])
         {
-            move = m;
+            i++;
+        }
+    }
+    if (i==size)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool canBeArranged(int arr[], int size)
+{
+    int limit = size-1;
+    int ascendingArr[size];
+    for (int x = 0; x < size; x++)
+    {
+        int count = 0;
+        for (int i = 0; i < size; i++)
+        {
+if (arr[x] < arr[i])
+            {
+                count++;
+            }
+        }
+        ascendingArr[limit - count] = arr[x];
+    }
+    int m = 0;
+    for (int n = 0; n < size; n++)
+    {
+        if(ascendingArr[n]==(ascendingArr[n+1]-1)){
             m++;
         }
-        selectedMoves[i] = MOVES[move];
     }
-    for (int j = 0; j < pinlength; j++)
-    {
-        cout << selectedMoves[j];
-        if (j != (pinlength - 1))
-        {
-            cout << ", ";
-        }
+    if(m==limit){
+        return true;
+    }
+    else{
+        return false;
     }
 }

@@ -1,86 +1,46 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
-string containsSeven(int numbers[], int size);
-bool getDigits(int num);
+int occurrence(string arr[], int size, char character);
+int checkCharacter(string word, char letter);
 
 main()
 {
-
-    int size, input, j = 1;
-    cout << "Enter the size of Array: ";
-    cin >> size;
-    int numbers[size];
-    for (int i = 0; i < size; i++)
+    int num;
+    string words[100];
+    char ch;
+    cout << "Enter how many words you want to enter: ";
+    cin >> num;
+    words[num];
+    for (int i = 0; i < num; i++)
     {
-        cout << "Enter Element " << j << ": ";
-        cin >> input;
-        numbers[i] = input;
-        j++;
+        cout << "Enter word " << i + 1 << ": ";
+        cin >> words[i];
     }
-    string result = containsSeven(numbers, size);
-    cout << result;
+    cout << "Enter the letter you want to count: ";
+    cin >> ch;
+    int result = occurrence(words, num, ch);
+    cout << ch << " shows up " << result << " times in the data.";
 }
-string containsSeven(int numbers[], int size)
+int occurrence(string arr[], int size, char character)
 {
-    int y = 0;
-    for (int i = 0; i < size; i++)
+    int count = 0;
+    int check;
+    for (int x = 0; x < size; x++)
     {
-
-        bool seven = getDigits(numbers[i]);
-
-        if (seven)
+        check = checkCharacter(arr[x], character);
+        count += check;
+    }
+    return count;
+}
+int checkCharacter(string word, char letter)
+{
+    int i = 0;
+    for (int x = 0; x < word.length(); x++)
+    {
+        if (letter == word[x])
         {
-            y++;
+            i++;
         }
     }
-    if (y > 0)
-    {
-        return "Boom!";
-    }
-    else
-    {
-        return "there is no 7 in the array";
-    }
-}
-bool getDigits(int num)
-{
-    int TotalDigits = 0;
-    int DividingNumber = 1;
-    int NumberAfterDivision;
-
-    while (num / DividingNumber != 0)
-    {
-        NumberAfterDivision = num / DividingNumber;
-        DividingNumber *= 10;
-        TotalDigits++;
-    }
-
-    float power;
-    int powerOfTen;
-    int loopCondition = 1;
-    int Digit = 0;
-    int x = 0;
-    while (loopCondition <= TotalDigits)
-    {
-        power = pow(10, TotalDigits - loopCondition);
-
-        powerOfTen = power;
-        Digit = num / powerOfTen;
-        num = num % powerOfTen;
-        loopCondition++;
-
-        if (Digit == 7)
-        {
-            x++;
-        }
-    }
-    if (x > 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return i;
 }
